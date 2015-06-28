@@ -1,0 +1,16 @@
+{
+  "isDevMode":true,
+  "rolesSetting":{
+    "autoCreateRoles":[
+      {"name":"superAdmin"},
+      {"name":"normalUser"},
+      {"name":"guest"}
+    ],
+    "autoCreateSuperAdmin":true,
+    "defaultAdminConfig":{
+      "password":"123456",
+      "email":"kai.jiang@digitalpublishing.cn"
+    }
+  }
+}
+
