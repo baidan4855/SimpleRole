@@ -1,7 +1,35 @@
 <template name="rolesList">
-    <ul>
+    <table>
+	    <tr>
+		    <td>role name</td>
+		    <td>operation</td>
+	    </tr>
     {{#each allRoles}}
-        <li>{{name}}</li>
+	    {{> singleRole }}
     {{/each}}
-    </ul>
+	    <tr>
+		    <td><input class="newInput"/></td>
+		    <td><button class="add-button">add</button></td>
+	    </tr>
+    </table>
+</template>
+
+<template name="singleRole">
+	<tr>
+		<td>
+			{{#if isCustomRole}}
+			<div class="textDiv">
+				<input class="nameInput" value="{{name}}"/>
+				<button class="modify-button">save</button>
+			</div>
+			{{else}}
+				{{name}}
+			{{/if}}
+		</td>
+		<td>
+			{{#if isCustomRole}}
+			<button class="delete-button">delete</button>
+			{{/if}}
+		</td>
+	</tr>
 </template>

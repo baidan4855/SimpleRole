@@ -1,0 +1,13 @@
+.textDiv {
+
+}
+table
+{
+    border-collapse: collapse;
+    border: none;
+    width: 200px;
+}
+td
+{
+    border: solid #ddd 1px;
+}

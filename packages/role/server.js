@@ -21,11 +21,14 @@ Meteor.publish('roles',function(){
 var validateNewRoleHooks= [];
 
 Roles.createDefaultRole = function(role){
-    role = _.extend({"default": true},role);
+    role = _.extend({"type": "default"},role);
     Roles.createRole(role);
 };
 Roles.createRole = function(role){
     role = _.extend({createdAt: new Date(), _id: Random.id()},role);
+    if(!role.type){
+        role = _.extend({"type": "custom"},role);
+    }
     var isRoleNameGood=true;
     _.each(validateNewRoleHooks,function(hook){
         if(!hook(role)){
@@ -84,18 +87,12 @@ Roles.isDefaultRole = function(roleName){
 
 //TODO: 修改用户的角色信息
 
+
 //TODO: 修改角色名称
-Roles.updateRole=function(id,role){
-
-    if(role.updateAt){
-        role.updateAt=new Date();
-    }else{
-        _.extend({"updateAt":new Date()},role);
-    }
-
+Roles.updateRole=function(id,roleName){
 
     try{
-        Meteor.roles.update({_id:id},{$set:{'name':role.name}});
+        Meteor.roles.update({"_id":id},{$set:{"name":roleName,"updateAt":new Date()}});
     }catch(e){
         throw e;
     }
