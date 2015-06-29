@@ -1,0 +1,53 @@
+<template name="usersList">
+	<table>
+		<tr>
+			<td>email</td>
+			<td>roles</td>
+			<td>operation</td>
+		</tr>
+		{{#each allUsers}}
+			{{> singleUser }}
+		{{/each}}
+
+	</table>
+	{{> changeRole}}
+</template>
+
+<template name="singleUser">
+	<tr>
+		<td>
+			{{#each emails}}
+			<span>
+				{{address}}
+				&nbsp;&nbsp;
+				{{#if verified}}
+					已验证
+				{{else}}
+					未验证
+				{{/if}}
+			</span>
+			{{/each}}
+		</td>
+		<td>
+			{{#each roles}}
+				{{getRoleName}}
+			{{/each}}
+		</td>
+		<td>
+			<button class="edit-button">change user's role</button>
+		</td>
+	</tr>
+</template>
+
+<template name="changeRole">
+	<div class="changeBox" style="display:none">
+		<input type="hidden" id="hideUserId"/>
+		{{#each allRoles}}
+			{{#if isOptional}}
+			<input type="checkbox" name="roles" value="{{_id}}"/>
+			{{/if}}
+			{{name}} <br>
+		{{/each}}
+		<button id="submitChange">submit</button>
+	</div>
+</template>

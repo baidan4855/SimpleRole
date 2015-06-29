@@ -17,5 +17,10 @@ Meteor.methods({
 		if(Meteor.isServer){
 			return Roles.deleteById(id);
 		}
+	},
+	"changeUserRole":function(userId,roleArr){
+		if(Meteor.isServer){
+			return Roles.changeUserRole(userId,roleArr);
+		}
 	}
 })

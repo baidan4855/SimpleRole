@@ -22,8 +22,10 @@ Package.onUse(function(api) {
   ],['client','server']);
 
   api.addFiles([
+    'inject.js',
     'server.js',
     'fixtures.js'
+
   ],['server']);
 
   api.addFiles([

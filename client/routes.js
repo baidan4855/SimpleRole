@@ -5,3 +5,5 @@ Router.configure({
 Router.route('/', {name: 'index'});
 
 Router.route('/roles',{name:'rolesList'})
+
+Router.route('/users',{name:'usersList'})

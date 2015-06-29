@@ -1,28 +1,12 @@
-Meteor.startup(function(){
-    //注射增加角色字段的方法到Accounts-base中
-    Accounts.onCreateUser(function(options,user){
-        if(options.roles){
-            user.roles=options.roles;
-        }else{
-            var role=Roles.queryByName("normalUser");
-            if(role){
-                user.roles=[role._id];
-            }
-        }
-        return user;
-    });
-});
 
-Meteor.publish('roles',function(){
-    return Meteor.roles.find();
-});
+
 
 // 创建角色
 var validateNewRoleHooks= [];
 
 Roles.createDefaultRole = function(role){
     role = _.extend({"type": "default"},role);
-    Roles.createRole(role);
+    return Roles.createRole(role);
 };
 Roles.createRole = function(role){
     role = _.extend({createdAt: new Date(), _id: Random.id()},role);
@@ -85,8 +69,16 @@ Roles.isDefaultRole = function(roleName){
     return idr;
 };
 
-//TODO: 修改用户的角色信息
 
+//TODO: 修改用户的角色信息
+Roles.changeUserRole=function(id,roleArr){
+    try{
+        Meteor.users.update({_id:id},{$set:{roles:roleArr}});
+    }catch(e){
+        throw e;
+    }
+    return true;
+}
 
 //TODO: 修改角色名称
 Roles.updateRole=function(id,roleName){
@@ -150,3 +142,4 @@ Roles.validateListRoles=function(func){
 Roles.queryByName=function(name){
     return Meteor.roles.findOne({"name":name});
 }
+
