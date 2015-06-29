@@ -1,7 +1,6 @@
 Template.usersList.helpers({
 	"allUsers":function(){
 		var u =  Meteor.users.find();
-		console.log(u.count());
 		return u;
 	}
 });
@@ -9,7 +8,6 @@ Template.usersList.helpers({
 Template.singleUser.helpers({
 	"getRoleName":function(){
 		var id=this.toString();
-		console.log(id);
 		var role = Meteor.roles.findOne({"_id":id});
 		if(!role || !role.name)
 			return undefined;
